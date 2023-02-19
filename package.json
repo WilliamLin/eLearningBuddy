@@ -1,0 +1,39 @@
+{
+  "name": "elearningbuddy",
+  "version": "1.0.0",
+  "description": "Source code for e-LearningBuddy.com",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/WilliamLin/eLearningBuddy.git"
+  },
+  "keywords": [
+    "AI Training",
+    "GPT-3"
+  ],
+  "author": "William Lin",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/WilliamLin/eLearningBuddy/issues"
+  },
+  "homepage": "https://github.com/WilliamLin/eLearningBuddy#readme",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "stop": "kill $(lsof -t -i:3000)",
+    "restart": "npm run build && npm run start"
+  },
+  "dependencies": {
+    "fs": "0.0.1-security",
+    "next": "^13.1.1",
+    "openai": "git+https://github.com/openai/openai-node.git",
+    "react": "^18.2.0",
+    "react-bootstrap": "^2.7.2",
+    "react-dom": "^18.2.0",
+    "tls": "0.0.1"
+  },
+  "engines": {
+    "node": ">=14.6.0"
+  }
+}
