@@ -5,7 +5,7 @@ const configuration = new Configuration({
 });
 const openai = new OpenAIApi(configuration);
 
-async function generateResults(req, res) {
+async function createCompletion(req, res) {
   if (!configuration.apiKey) {
     res.status(500).json({
       error: {
@@ -15,16 +15,19 @@ async function generateResults(req, res) {
     return;
   }
 
-  const numberOfQuestions = req.body.numberOfQuestions || 1;
   process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
+  const body = req.body;
+  const prompt = body.prompt
+  console.log(`prompt =${prompt}`)
+  if (!prompt || prompt.length === 0){
+    return "Please enter a prompt"
+  }
   try {
     const completion = await openai.createCompletion({
       model: "text-davinci-003",
-      //model: "text-ada-001",
-      //model: "text-babbage-001",
-      prompt: generatePrompt(),
-      temperature: 0.2,
-      max_tokens: 100 
+      prompt: prompt,
+      temperature: 0.5,
+      max_tokens: 100
     });
     // log the completion data in json format
     console.log("Completion Data\n" + JSON.stringify(completion.data))
@@ -49,10 +52,4 @@ async function generateResults(req, res) {
   }
 }
 
-module.exports = generateResults;
-
-function generatePrompt() {
-    const prompt=  "Generate a 1 digit plus question. response with answer. Example 1+1=2"
-    console.log(prompt)
-    return prompt
-}
+module.exports = createCompletion;
